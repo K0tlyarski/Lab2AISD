@@ -2,7 +2,6 @@
 #include "Header.h"
 #include <cmath>
 #include <complex>
-
 template <typename T>
 void GetValueFromUser(T& value)
 {
@@ -22,7 +21,6 @@ void GetValueFromUser(T& value)
         }
     }
 }
-
 template<typename T>
 void GetValueFromUser(std::complex<T>& value)
 {
@@ -225,7 +223,7 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                     GetValueFromUser(InsertNumber);
                     std::cout<<"Enter the index: ";
                     int InsertIndex;
-                    GetValueFromUserInRange(InsertIndex,0,vector.GetSize());
+                    GetValueFromUser(index);
                     vector.Insert(InsertNumber, InsertIndex);
                 } catch (std::out_of_range& ex) {
                     std::cout << ex.what() << " Try again" << std::endl;
@@ -239,7 +237,7 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                 try {
                     std::cout<<"Enter the index: ";
                     int index;
-                    GetValueFromUserInRange(index,0,vector.GetSize());
+                    GetValueFromUser(index);
                     std::cout<<vector.operator[](index)<<std::endl;
                     
                 } catch (std::out_of_range& ex) {
@@ -393,7 +391,7 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                 std::complex<Type_Vectors> sqr((Type_Vectors)0, (Type_Vectors)0);
                 
                 for (int i = 0; i<vector2.GetSize(); i++) {
-                    float inc;
+                    std::complex<Type_Vectors> inc((Type_Vectors)0, (Type_Vectors)0);
                     inc += vector2.operator[](i)*vector2.operator[](i);
                     sqr = sqrt(inc);
                     
@@ -437,7 +435,8 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                 try {
                     std::cout<<"Enter the index: ";
                     int index;
-                    GetValueFromUserInRange(index,0,vector.GetSize());
+                    GetValueFromUser(index);
+                   
                     std::cout<<vector.operator[](index)<<std::endl;
                     
                 } catch (std::out_of_range& ex) {

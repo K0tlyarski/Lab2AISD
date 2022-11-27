@@ -2,7 +2,7 @@
 //  Header.h
 //  test1
 //
-//
+//  Created by Вадим Котлярский on 24.09.2022.
 //
 
 #ifndef Header_h
@@ -11,7 +11,6 @@
 
 #include <iostream>
 #include <complex>
-
 template <class T>
 class Vector
 {
@@ -47,13 +46,13 @@ public:
     T& operator[] (const size_t index);
     T operator[](const size_t index) const;
     Vector<T>& operator+= (const Vector<T>& rhs);
-    Vector<T> operator+(const Vector<T>& rhs) const;
+    Vector operator+(const Vector<T>& rhs) const;
     Vector<T>& operator-= (const Vector<T>& rhs);
-    Vector<T> operator-(const Vector<T>& rhs) const;
+    Vector operator-(const Vector<T>& rhs) const;
     T DotProduct(const Vector<T>& rhs) const
     {
         if (size != rhs.size) throw "Bad dimensions";
-        T scalar_product = 0;
+        float scalar_product = 0;
         for (size_t i = 0; i < size; i++)
         {
             scalar_product += data[i] * rhs.data[i];
@@ -61,12 +60,20 @@ public:
         return scalar_product;
     }
     Vector<T>& operator*=(const T& value);
-    Vector<T> operator*(const T& value) const;
+    Vector operator*(const T& value) const;
     Vector<T>& operator/=(const T& value);
-    Vector<T> operator/(const T& value) const;
+    Vector operator/(const T& value) const;
     bool operator==(const Vector<T>& rhs) const;
     bool operator!=(const Vector<T>& rhs) const;
+    
+
 };
+template<class T>
+Vector<T> & operator*=(const T& value, Vector<T>& rhs);
+template<class T>
+Vector<T> operator*(const T& value, const Vector<T>& rhs);
+template<class T>
+std::ostream& operator<< (std::ostream& out, const Vector<T>& vector);
 template<>
 std::complex<float> Vector<std::complex<float>>::DotProduct(const Vector<std::complex<float>>& rhs) const
 {
@@ -89,14 +96,6 @@ std::complex<double> Vector<std::complex<double>>::DotProduct(const Vector<std::
     }
     return scalar_product;
 }
-
-template <class T>
-Vector<T>& operator*=(const T& value, Vector<T>& rhs);
-template <class T>
-Vector<T> operator*(const T& value, const Vector<T>& rhs);
-template <class T>
-std::ostream& operator<< (std::ostream& out, const Vector<T>& vector);
-
 template<class T>
 void Vector<T>::ExpandCapacityByN(const size_t n, const size_t index, const bool end_insertion)
 {
@@ -149,7 +148,7 @@ void Vector<T>::Insert(const T& value, const size_t index)
         size++;
     }
 }
-template <class T>
+template<class T>
 Vector<T>::Vector(const Vector<T>& rhs) :size(rhs.size), capacity(rhs.capacity)
 {
     if (size)
@@ -168,7 +167,7 @@ Vector<T>::Vector(const Vector<T>& rhs) :size(rhs.size), capacity(rhs.capacity)
         grow_size = 10;
     }
 }
-template <class T>
+template<class T>
 void Vector<T>::Clear()
 {
     delete[] data;
@@ -176,7 +175,7 @@ void Vector<T>::Clear()
     size = 0;
     capacity = 0;
 }
-template <class T>
+template<class T>
 size_t Vector<T>::GetSize() const
 {
     return size;
@@ -186,7 +185,7 @@ const T* Vector<T>::GetData() const
 {
     return data;
 }
-template <class T>
+template<class T>
 void Vector<T>::Print() const
 {
     if (!size)
@@ -201,7 +200,7 @@ void Vector<T>::Print() const
     }
     std::cout << data[size - 1] << "] , the size of vector:" << size << std::endl;
 }
-template <class T>
+template<class T>
 void Vector<T>::PushBack(const T& value)
 {
     if (size == 0 && capacity == 0 && data == NULL)
@@ -218,7 +217,7 @@ void Vector<T>::PushBack(const T& value)
         size++;
     }
 }
-template <class T>
+template<class T>
 Vector<T>& Vector<T>::operator=(const Vector<T>& rhs)
 {
     if (this == &rhs) return *this;
@@ -243,7 +242,7 @@ Vector<T>& Vector<T>::operator=(const Vector<T>& rhs)
     capacity = rhs.capacity;
     return *this;
 }
-template <class T>
+template<class T>
 void Vector<T>::Erase(const size_t index)
 {
     if (size == 0) return;
@@ -254,19 +253,19 @@ void Vector<T>::Erase(const size_t index)
     }
     size--;
 }
-template <class T>
+template<class T>
 T& Vector<T>::operator[] (const size_t index)
 {
     if (index >= size) throw std::out_of_range("Index is out of range");
     return data[index];
 }
-template <class T>
+template<class T>
 T Vector<T>::operator[](const size_t index) const
 {
     if (index >= size) throw std::out_of_range("Index is out of range");
     return data[index];
 }
-template <class T>
+template<class T>
 Vector<T>& Vector<T>::operator+= (const Vector<T>& rhs)
 {
     if (size != rhs.size) throw "Bad dimensions";
@@ -276,7 +275,7 @@ Vector<T>& Vector<T>::operator+= (const Vector<T>& rhs)
     }
     return *this;
 }
-template <class T>
+template<class T>
 Vector<T> Vector<T>::operator+(const Vector<T>& rhs) const
 {
     if (size != rhs.size) throw "Bad dimensions";
@@ -284,7 +283,7 @@ Vector<T> Vector<T>::operator+(const Vector<T>& rhs) const
     result += rhs;
     return result;
 }
-template <class T>
+template<class T>
 Vector<T>& Vector<T>::operator-= (const Vector<T>& rhs)
 {
     if (size != rhs.size) throw "Bad dimensions";
@@ -294,7 +293,7 @@ Vector<T>& Vector<T>::operator-= (const Vector<T>& rhs)
     }
     return *this;
 }
-template <class T>
+template<class T>
 Vector<T> Vector<T>::operator-(const Vector<T>& rhs) const
 {
     if (size != rhs.size) throw "Bad dimensions";
@@ -302,7 +301,7 @@ Vector<T> Vector<T>::operator-(const Vector<T>& rhs) const
     result -= rhs;
     return result;
 }
-template <class T>
+template<class T>
 Vector<T>& Vector<T>::operator*=(const T& value)
 {
     for (size_t i = 0; i < size; i++)
@@ -311,14 +310,14 @@ Vector<T>& Vector<T>::operator*=(const T& value)
     }
     return *this;
 }
-template <class T>
+template<class T>
 Vector<T> Vector<T>::operator*(const T& value) const
 {
-    Vector<T> result(*this);
+    Vector result(*this);
     result *= value;
     return result;
 }
-template <class T>
+template<class T>
 Vector<T>& Vector<T>::operator/=(const T& value)
 {
     if (value == (T)0) throw "Dividing by zero is prohibited";
@@ -328,63 +327,45 @@ Vector<T>& Vector<T>::operator/=(const T& value)
     }
     return *this;
 }
-template <class T>
+template<class T>
 Vector<T> Vector<T>::operator/(const T& value) const
 {
-    Vector<T> result(*this);
+    Vector result(*this);
     result /= value;
     return result;
 }
-template <class T>
+template<class T>
 bool Vector<T>::operator==(const Vector<T>& rhs) const
 {
     if (size != rhs.size) return false;
     for (size_t i = 0; i < size; i++)
     {
-        if (abs(data[i] - rhs.data[i]) > 0) return false;
+        if (abs(data[i] - rhs.data[i]) > 0) return false; ///////
     }
     return true;
 }
-template<>
-bool Vector<double>::operator==(const Vector<double>& rhs) const
-{
-    if (size != rhs.size) return false;
-    for (size_t i = 0; i < size; i++)
-    {
-        if (abs(data[i] - rhs.data[i]) >= 0.005) return false;
-    }
-    return true;
-}
-template<>
-bool Vector<float>::operator==(const Vector<float>& rhs) const
-{
-    if (size != rhs.size) return false;
-    for (size_t i = 0; i < size; i++)
-    {
-        if (abs(data[i] - rhs.data[i]) >= 0.005) return false;
-    }
-    return true;
-}
-template <class T>
+
+
+template<class T>
 bool Vector<T>::operator!=(const Vector<T>& rhs) const
 {
     return !(*this == rhs);
 }
-template <class T>
+template<class T>
 Vector<T>& operator*=(const T& value, Vector<T>& rhs)
 {
     rhs *= value;
     return rhs;
 }
-template <class T>
+template<class T>
 Vector<T> operator*(const T& value, const Vector<T>& rhs)
 {
-    Vector<T> result(rhs);
+    Vector result(rhs);
     result *= value;
     return result;
 }
-template <class T>
-std::ostream& operator<< (std::ostream& out, const Vector<T>& vector)
+template<class T>
+ std::ostream& operator<< (std::ostream& out, const Vector<T>& vector)
 {
     size_t size = vector.GetSize();
     if (!size)
@@ -399,6 +380,6 @@ std::ostream& operator<< (std::ostream& out, const Vector<T>& vector)
     }
     out << vector[size - 1] << "] , the size of vector:" << size << std::endl;
     return out;
-}
 
+}
 #endif /* Header_h */
