@@ -2,34 +2,17 @@
 #include "Header.h"
 #include <cmath>
 #include <complex>
-template <typename T>
-void GetValueFromUser(T& value)
-{
-    while (true)
-    {
-        std::cin >> value;
-        if (std::cin.fail() || std::cin.bad())
-        {
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cout << "The input is incorrect, please try again" << std::endl;
-        }
-        else
-        {
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            return;
-        }
-    }
-}
+
+
 template<typename T>
 void GetValueFromUser(std::complex<T>& value)
 {
     T real = 0;
     T imag = 0;
     std::cout << "Please enter the real part of complex number" << std::endl;
-    GetValueFromUser(real);
+    std::cin>>real;
     std::cout << "Please enter the imaginary part of complex number" << std::endl;
-    GetValueFromUser(imag);
+    std::cin>>imag;
     value.real(real);
     value.imag(imag);
 }
@@ -46,7 +29,7 @@ void GetValueFromUserInRange(T& value, const T& left_border, const T& right_bord
     std::cout << condition;
     while (true)
     {
-        GetValueFromUser(value);
+        std::cin>>value;
         if (IsValueInRange(value, left_border, right_border))
         {
             return;
@@ -83,11 +66,11 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                     try {
                         std::cout << "Enter a index of element to edit" << std::endl;
                         int index = 0;
-                        GetValueFromUser(index);
+                        std::cin>>index;
                     
                         std::cout << "Enter a new value for the element" << std::endl;
                         Type_Vectors value = 0;
-                        GetValueFromUser(value);
+                        std::cin>>value;
                         vector[index] = value;
                     }
                     catch (std::out_of_range& ex)
@@ -125,7 +108,7 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
             {
                 std::cout << "Enter a scalar" << std::endl;
                 int scalar = 0;
-                GetValueFromUser(scalar);
+                std::cin>>scalar;
                 try
                 {
                     vector /= scalar;
@@ -141,7 +124,7 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
             {
                 std::cout << "Enter a scalar" << std::endl;
                 int scalar = 0;
-                GetValueFromUser(scalar);
+                std::cin>>scalar;
                 vector *= scalar;
                 std::cout<<vector<<std::endl;
                 
@@ -155,7 +138,7 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                     
                     std::cout << "Enter the index of element to delete" << std::endl;
                     int index = 0;
-                    GetValueFromUser(index);
+                    std::cin>>index;
                     try
                     {
                         vector.Erase(index);
@@ -211,7 +194,7 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
             {
                 Type_Vectors number;
                 std::cout<<"Enter the element: ";
-                GetValueFromUser(number);
+                std::cin>>number;
                 vector.PushBack(number);
                 break;
             }
@@ -220,10 +203,10 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                 try {
                     std::cout<<"Enter the element: ";
                     Type_Vectors InsertNumber;
-                    GetValueFromUser(InsertNumber);
+                    std::cin>>InsertNumber;
                     std::cout<<"Enter the index: ";
                     int InsertIndex;
-                    GetValueFromUser(index);
+                    std::cin>>InsertIndex;
                     vector.Insert(InsertNumber, InsertIndex);
                 } catch (std::out_of_range& ex) {
                     std::cout << ex.what() << " Try again" << std::endl;
@@ -237,7 +220,7 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                 try {
                     std::cout<<"Enter the index: ";
                     int index;
-                    GetValueFromUser(index);
+                    std::cin>>index;
                     std::cout<<vector.operator[](index)<<std::endl;
                     
                 } catch (std::out_of_range& ex) {
@@ -280,7 +263,7 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                     try {
                         std::cout << "Enter a index of element to edit" << std::endl;
                         int index = 0;
-                        GetValueFromUser(index);
+                        std::cin>>index;
                     
                         std::cout << "Enter a new value for the element" << std::endl;
                         std::complex<Type_Vectors> value((Type_Vectors)0, (Type_Vectors)0);
@@ -352,7 +335,7 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                     
                     std::cout << "Enter the index of element to delete" << std::endl;
                     int index = 0;
-                    GetValueFromUser(index);
+                    std::cin>>index;
                     try
                     {
                         vector.Erase(index);
@@ -421,7 +404,7 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                     GetValueFromUser(InsertNumber);
                     std::cout<<"Enter the index: ";
                     int InsertIndex;
-                    GetValueFromUser(InsertIndex);
+                    std::cin>>InsertIndex;
                     vector.Insert(InsertNumber, InsertIndex);
                 } catch (std::out_of_range& ex) {
                     std::cout << ex.what() << " Try again" << std::endl;
@@ -435,7 +418,7 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                 try {
                     std::cout<<"Enter the index: ";
                     int index;
-                    GetValueFromUser(index);
+                    std::cin>>index;
                    
                     std::cout<<vector.operator[](index)<<std::endl;
                     
@@ -470,7 +453,8 @@ void Menu(Type_Vectors)
         std::cout << "5 - Print are two vectors equal or not\n6 - make first vector equal to second\n";
         std::cout << "7 - finish working with vectors" << std::endl;
         int action = 0;
-        GetValueFromUserInRange(action, (int)0, (int)7, "\nEnter a number in range [0;7]");
+        std::cin>>action;
+        //GetValueFromUserInRange(action, (int)0, (int)7, "\nEnter a number in range [0;7]");
         switch (action)
         {
         case (0):
