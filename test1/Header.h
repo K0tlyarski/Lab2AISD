@@ -92,7 +92,8 @@ std::complex<double> Vector<std::complex<double>>::DotProduct(const Vector<std::
     std::complex<double> scalar_product = 0;
     for (size_t i = 0; i < size; i++)
     {
-        scalar_product += std::complex<double>(data[i].real() * rhs.data[i].real(), (-1) * data[i].imag() * rhs.data[i].imag());
+        //scalar_product += std::complex<double>(data[i].real() * rhs.data[i].real(), (-1) * data[i].imag() * rhs.data[i].imag());
+        scalar_product += std::complex<double>(data[i].real() * rhs.data[i].real() - data[i].imag() * rhs.data[i].imag(), data[i].real() * rhs.data[i].imag() + data[i].imag() * rhs.data[i].real());
     }
     return scalar_product;
 }
