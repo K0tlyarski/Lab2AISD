@@ -167,7 +167,8 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                 
                 for (int i = 0; i<vector.GetSize(); i++) {
                     
-                    intermediate_result = -(vector.operator[](i) * vector2.operator[](i));
+                    //intermediate_result = -(vector.operator[](i) * vector2.operator[](i));
+                    intermediate_result = -(vector[i] * vector2[i]);
                     result_1 = intermediate_result / vector.operator[](0);
                 }
                 
@@ -177,13 +178,15 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                 Type_Vectors sqr;
                 for (int i = 0; i<vector2.GetSize(); i++) {
                     float inc;
-                    inc += vector2.operator[](i)*vector2.operator[](i);
+                    //inc += vector2.operator[](i)*vector2.operator[](i);
+                    inc += vector2[i]*vector2[i];
                     sqr = sqrt(inc);
                     
                 }
                 Vector<Type_Vectors> vector3;
                 for (int i = 0; i<vector2.GetSize(); i++) {
-                    vector3.PushBack(vector2.operator[](i)/sqr);
+                    //vector3.PushBack(vector2.operator[](i)/sqr);
+                    vector3.PushBack(vector2[i]/sqr);
                 }
                 std::cout<<"Perpendicular vector: ";
                 std::cout<<vector3<<std::endl;
@@ -221,7 +224,8 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                     std::cout<<"Enter the index: ";
                     int index;
                     std::cin>>index;
-                    std::cout<<vector.operator[](index)<<std::endl;
+                    //std::cout<<vector.operator[](index)]<<std::endl;
+                    std::cout<<vector[index]<<std::endl;
                     
                 } catch (std::out_of_range& ex) {
                     std::cout << ex.what() << " Try again" << std::endl;
@@ -365,8 +369,10 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                 
                 for (int i = 0; i<vector.GetSize(); i++) {
                     
-                    intermediate_result = -(vector.operator[](i) * vector2.operator[](i));
-                    result_1 = intermediate_result / vector.operator[](0);
+                    //intermediate_result = -(vector.operator[](i) * vector2.operator[](i));
+                    intermediate_result = -(vector[i] * vector2[i]);
+                    //result_1 = intermediate_result / vector.operator[](0);
+                    result_1 = intermediate_result / vector[0];
                 }
                 
                 vector2.Insert(result_1, 0);
@@ -375,7 +381,8 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                 
                 for (int i = 0; i<vector2.GetSize(); i++) {
                     std::complex<Type_Vectors> inc((Type_Vectors)0, (Type_Vectors)0);
-                    inc += vector2.operator[](i)*vector2.operator[](i);
+                    //inc += vector2.operator[](i)*vector2.operator[](i);
+                    inc += vector2[i]*vector2[i];
                     sqr = sqrt(inc);
                     
                 }
@@ -420,7 +427,8 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                     int index;
                     std::cin>>index;
                    
-                    std::cout<<vector.operator[](index)<<std::endl;
+                    //std::cout<<vector.operator[](index)<<std::endl;
+                    std::cout<<vector[index]<<std::endl;
                     
                 } catch (std::out_of_range& ex) {
                     std::cout << ex.what() << " Try again" << std::endl;
