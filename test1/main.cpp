@@ -186,7 +186,7 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                     vector3.PushBack(vector2.operator[](i)/sqr);
                 }
                 std::cout<<"Perpendicular vector: ";
-                vector3.Print();
+                std::cout<<vector3<<std::endl;
                 std::cout<<"\n\n\n";
                 break;
             }
@@ -384,7 +384,7 @@ void MenuWorkingWithVector(Vector<std::complex<Type_Vectors>>& vector)
                     vector3.PushBack(vector2.operator[](i)/sqr);
                 }
                 std::cout<<"Perpendicular vector: ";
-                vector3.Print();
+                std::cout<<vector3<<std::endl;
                 std::cout<<"\n\n\n";
                 break;
             }
