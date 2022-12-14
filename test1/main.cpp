@@ -2,6 +2,7 @@
 #include "Header.h"
 #include <cmath>
 #include <complex>
+#include <typeinfo>
 
 
 template<typename T>
@@ -161,36 +162,42 @@ void MenuWorkingWithVector(Vector<Type_Vectors>& vector)
                 Vector<Type_Vectors> vector2;
                 Type_Vectors intermediate_result;
                 Type_Vectors result_1;
-                for (int i = 0; i<vector.GetSize(); i++) {
-                    vector2.PushBack(1);
-                }
-                
-                for (int i = 0; i<vector.GetSize(); i++) {
+                if (typeid(intermediate_result) != typeid(int)) {
+                    for (int i = 0; i<vector.GetSize(); i++) {
+                        vector2.PushBack(1);
+                    }
                     
-                    //intermediate_result = -(vector.operator[](i) * vector2.operator[](i));
-                    intermediate_result = -(vector[i] * vector2[i]);
-                    result_1 = intermediate_result / vector.operator[](0);
-                }
-                
-                vector2.Insert(result_1, 0);
-                vector2.Erase(vector2.GetSize()-1);
-                
-                Type_Vectors sqr;
-                for (int i = 0; i<vector2.GetSize(); i++) {
-                    float inc;
-                    //inc += vector2.operator[](i)*vector2.operator[](i);
-                    inc += vector2[i]*vector2[i];
-                    sqr = sqrt(inc);
+                    for (int i = 0; i<vector.GetSize(); i++) {
+                        
+                        //intermediate_result = -(vector.operator[](i) * vector2.operator[](i));
+                        intermediate_result = -(vector[i] * vector2[i]);
+                        result_1 = intermediate_result / vector.operator[](0);
+                    }
                     
+                    vector2.Insert(result_1, 0);
+                    vector2.Erase(vector2.GetSize()-1);
+                    
+                    Type_Vectors sqr;
+                    for (int i = 0; i<vector2.GetSize(); i++) {
+                        float inc;
+                        //inc += vector2.operator[](i)*vector2.operator[](i);
+                        inc += vector2[i]*vector2[i];
+                        sqr = sqrt(inc);
+                        
+                    }
+                    Vector<Type_Vectors> vector3;
+                    for (int i = 0; i<vector2.GetSize(); i++) {
+                        //vector3.PushBack(vector2.operator[](i)/sqr);
+                        vector3.PushBack(vector2[i]/sqr);
+                    }
+                    std::cout<<"Perpendicular vector: ";
+                    std::cout<<vector3<<std::endl;
+                    std::cout<<"\n\n\n";
                 }
-                Vector<Type_Vectors> vector3;
-                for (int i = 0; i<vector2.GetSize(); i++) {
-                    //vector3.PushBack(vector2.operator[](i)/sqr);
-                    vector3.PushBack(vector2[i]/sqr);
+                else{
+                    std::cout<<"the perpendicular is not calculated"<<std::endl;
                 }
-                std::cout<<"Perpendicular vector: ";
-                std::cout<<vector3<<std::endl;
-                std::cout<<"\n\n\n";
+                
                 break;
             }
             case (6):
